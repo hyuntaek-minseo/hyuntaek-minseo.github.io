@@ -254,7 +254,7 @@ const W = {
     { src: "images/web/w3.jpg", full: true }, // 빼꼼
     { src: "images/web/w4.jpg", full: true }, // 바이올린-숲
     { src: "images/web/w5.jpg" }, { src: "images/web/w6.jpg" },
-    { src: "images/web/w7.jpg" }, { src: "images/web/w10.jpg" }, // 바이올린-하늘을 신부 독샷 앞으로(2026-11-24)
+    // 2026-11-24 바이올린 마지막 2장(w7 눈맞춤, w10 하늘) 뺌
     { src: "images/web/w8.jpg" }, { src: "images/web/w9.jpg" }, // 신부 독샷, 신랑 독샷
   ],
   map: "images/map.png", // 종이 청첩장 약도
@@ -395,8 +395,8 @@ $("#app").innerHTML = `
     <div class="save-cal">
       <div class="btns">
         <a href="${gcalUrl}" target="_blank" rel="noreferrer">구글 <small>캘린더 저장</small></a>
-        <a href="wedding.ics">애플 <small>캘린더 저장</small></a>
-        <a href="wedding.ics">삼성 <small>캘린더 저장</small></a>
+        <a href="wedding.ics" target="_blank" rel="noreferrer">애플 <small>캘린더 저장</small></a>
+        <a href="wedding.ics" target="_blank" rel="noreferrer">삼성 <small>캘린더 저장</small></a>
       </div>
     </div>
     <div class="map-links">
