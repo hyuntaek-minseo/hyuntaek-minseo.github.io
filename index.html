@@ -532,14 +532,20 @@ if (W.bgm) {
 }
 
 // 축하 연락하기 팝업
+// 2026-11-25 크게 보기, 연락하기 창을 열면 기록을 하나 쌓아서, 폰의 뒤로 가기는 창만 닫고 페이지는 남게 한다
+function openLayer(el) { el.classList.add("open"); document.body.classList.add("lock"); if (!history.state?.layer) history.pushState({ layer: 1 }, ""); }
+function hideLayers() { document.querySelectorAll("#lightbox.open, #contact-modal.open").forEach((el) => el.classList.remove("open")); document.body.classList.remove("lock"); }
+function closeLayer() { if (history.state?.layer) history.back(); else hideLayers(); } // 닫기 버튼도 쌓은 기록을 되돌려 뒤로 가기가 한 번 더 필요 없게
+addEventListener("popstate", hideLayers);
+
 const cm = $("#contact-modal");
 $("#contact-open").addEventListener("click", () => {
   cm.innerHTML = `<div class="modal-box"><button class="modal-close" aria-label="닫기">×</button><span>CONTACT</span><h2>축하 연락하기</h2>
     ${contactGroup("신랑측", g, "신랑")}${contactGroup("신부측", b, "신부")}</div>`;
-  cm.classList.add("open"); document.body.classList.add("lock");
+  openLayer(cm);
 });
 cm.addEventListener("click", (e) => {
-  if (e.target === cm || e.target.closest(".modal-close")) { cm.classList.remove("open"); document.body.classList.remove("lock"); }
+  if (e.target === cm || e.target.closest(".modal-close")) closeLayer();
 });
 
 // 사진 크게 보기
@@ -549,13 +555,13 @@ function openLightbox(i) {
   const lb = $("#lightbox");
   lb.innerHTML = `<button class="close" aria-label="닫기">×</button><button class="nav prev" aria-label="이전">‹</button>
     ${photo(PHOTOS[i], `웨딩 사진 ${i + 1}`)}<button class="nav next" aria-label="다음">›</button><span class="count">${i + 1} / ${PHOTOS.length}</span>`;
-  lb.classList.add("open"); document.body.classList.add("lock");
+  openLayer(lb);
 }
 $("#lightbox").addEventListener("click", (e) => {
   const n = PHOTOS.length;
   if (e.target.closest(".prev")) return openLightbox((cur - 1 + n) % n);
   if (e.target.closest(".next")) return openLightbox((cur + 1) % n);
-  if (e.target.closest(".close") || e.target.id === "lightbox") { $("#lightbox").classList.remove("open"); document.body.classList.remove("lock"); }
+  if (e.target.closest(".close") || e.target.id === "lightbox") closeLayer();
 });
 </script>
 </body>
