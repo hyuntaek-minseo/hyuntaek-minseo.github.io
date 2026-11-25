@@ -56,8 +56,8 @@
   /* 커버 */
   /* 커버: 세로로 긴 사진 위에 글씨, 아래는 물결로 종이와 이어진다 (레퍼런스: files/invitation-refs/main-cover-ref.jpg) */
   .hero { position: relative; height: min(184vw, 100svh, 880px); min-height: 560px; color: #fff; text-align: center; overflow: hidden; }
-  /* 2026-11-25 폰에서 스크롤하면 주소창이 접히며 화면 높이가 바뀌어 커버가 갑자기 커졌다. 높이가 바뀔 때 천천히 부드럽게 */
-  .hero { transition: height 1.6s cubic-bezier(.22,.61,.36,1); }
+  /* 2026-11-25 폰에서 스크롤하면 주소창이 접히며 화면 높이가 바뀌어 커버가 커졌다(천천히 커지게 했다가 그래도 거슬려 아예 뺌, 사용자 결정).
+     이제 커버 높이는 처음 열 때 한 번 px 로 정하고(fixHeroHeight), 화면 폭이 바뀔 때만 다시 정한다. 주소창 때문에 높이만 바뀌면 그대로 둔다 */
   .hero .ph, .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 85%; }
   .hero .ph { background: linear-gradient(180deg, #2f3a2c 0%, #4a5a44 45%, #7d8c72 75%, #a9b39c 100%); color: rgba(255,255,255,.5); align-items: center; padding-top: 40%; }
   .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,14,10,.45) 0%, rgba(10,14,10,.12) 38%, rgba(0,0,0,0) 60%); pointer-events: none; }
@@ -491,6 +491,9 @@ function drawWave() {
   }
   $("#wave").setAttribute("d", d + " L480 48 L0 48 Z");
 }
+{ const hero = $(".hero"); let lastW = 0;
+  const fixHeroHeight = () => { if (innerWidth === lastW) return; lastW = innerWidth; hero.style.height = Math.max(560, Math.min(innerWidth * 1.84, innerHeight, 880)) + "px"; };
+  fixHeroHeight(); addEventListener("resize", fixHeroHeight); }
 { const hi = $(".hero img"); if (hi) { hi.complete ? drawWave() : hi.addEventListener("load", drawWave); addEventListener("resize", drawWave); $(".hero").addEventListener("transitionend", drawWave); } }
 
 const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("on"); io.unobserve(e.target); } }), { threshold: .12 });
