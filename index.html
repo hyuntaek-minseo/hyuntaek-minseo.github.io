@@ -10,7 +10,7 @@
 <meta name="description" content="2027년 2월 14일 일요일 오후 3시 10분, 라마다 서울 신도림 호텔에서 열리는 한현택 &amp; 김민서의 결혼식에 초대합니다." />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="한현택 ♡ 김민서 결혼합니다" />
-<meta property="og:description" content="27년 2월 14일 일요일 3시 10분 | 라마다 서울 신도림 호텔" />
+<meta property="og:description" content="27년 2월 14일 (일) 3:10 | 라마다 서울 신도림 호텔" />
 <!-- 2026-11-24 커버(헤더) 사진 원본 그대로. 미리보기는 절대 주소가 필요해서 최종 주소(github.io)로 -->
 <meta property="og:url" content="https://hyuntaek-minseo.github.io/" />
 <meta property="og:image" content="https://hyuntaek-minseo.github.io/images/web/hero.jpg" />
@@ -378,7 +378,7 @@ $("#app").innerHTML = `
         <div class="hero-kicker">THE WEDDING OF</div>
         <h1 class="hero-names"><span>${esc(g.en)}</span><i>&amp;</i><span>${esc(b.en)}</span></h1>
         <p class="hero-ko">${esc(g.name)} &amp; ${esc(b.name)}</p>
-        <p class="hero-date">${Y}.${pad(M)}.${pad(D)} ${WEEK_EN[kd.getDay()]} ${hour % 12 || 12}:${pad(min)}${hour < 12 ? "AM" : "PM"}</p>
+        <p class="hero-date">${Y}.${pad(M)}.${pad(D)} ${WEEK_EN[kd.getDay()]} ${hour % 12 || 12}:${pad(min)} ${hour < 12 ? "AM" : "PM"}</p>
         <p class="hero-venue">${esc(place)}</p>
       </div>
       <svg class="hero-wave" viewBox="0 0 480 48" preserveAspectRatio="none" aria-hidden="true">
